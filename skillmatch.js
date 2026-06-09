@@ -34,7 +34,7 @@ const jobPostings = [
 
 //==============================INITIALIZATION=========================================
 
-const jobRequirements = jobPostings[0].requirements;
+const jobRequirements = jobPostings[1].requirements;
 
 const candidateSkills = candidate.skills;
 
@@ -50,7 +50,7 @@ const missingSkills = jobRequirements.filter(requirement =>
 
 const fulfilledRequirements = matchingSkills.length;
 
-//==============================APPLIED LOGIC=====================================
+//==============================APPLIED-LOGIC=====================================
 // For each candidate skill that is included in the job posting requirements,
 // return its name. If it does not match, do nothing.
 
@@ -58,14 +58,45 @@ const totalRequirements = jobRequirements.length;
 
 // console.log(totalRequirements);
 
-const compatibility = (fulfilledRequirements / totalRequirements) * 100;
+const compatibilityRate = (fulfilledRequirements / totalRequirements) * 100;
 
 const compatibilityMessage = `
-    Company: ${jobPostings[0].company}
-    Position: ${jobPostings[0].position}
-    Compatibility: ${compatibility}%
+    Company: ${jobPostings[1].company}
+    Position: ${jobPostings[1].position}
+    Compatibility: ${compatibilityRate}%
     Matching Skills: ${matchingSkills}
     Missing Skills: ${missingSkills}
 `;
 
 console.log(compatibilityMessage);
+
+//==============================CLASSIFYING-COMPATIBILITY============================
+
+const compatibilityClassification = (compatibilityRate) => {
+    if (compatibilityRate === 100) {
+        let Total = `Total compatibility`
+        return Total;
+    } else if (compatibilityRate >= 80) {
+        let High = `High compatibility`
+        return High;
+    } else if (compatibilityRate >= 50) {
+        let Moderate = `Moderate compatibility`
+        return Moderate;
+    } else if (compatibilityRate >= 1) {
+        let Low = `Low compatibility`
+        return Low;
+    } else if (compatibilityRate === 0) {
+        let No = `No compatibility`
+        return No;
+    } else {
+        let Error = `Error`
+        return Error;
+    }
+}
+
+const chekingCompatibility = compatibilityClassification(compatibilityRate)
+
+console.log(`
+    Checking Compatibility:
+    ${chekingCompatibility}
+    `)
