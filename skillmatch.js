@@ -34,7 +34,7 @@ const jobPostings = [
 
 //==============================INITIALIZATION=========================================
 
-const jobRequirements = jobPostings[1].requirements;
+const jobRequirements = jobPostings[0].requirements;
 
 const candidateSkills = candidate.skills;
 
@@ -48,6 +48,8 @@ const missingSkills = jobRequirements.filter(requirement =>
     candidateSkills.includes(requirement) === false
 );
 
+const missingFormated = missingSkills.map (skill => `    -${skill}`)
+
 const fulfilledRequirements = matchingSkills.length;
 
 //==============================APPLIED-LOGIC=====================================
@@ -58,14 +60,15 @@ const totalRequirements = jobRequirements.length;
 
 // console.log(totalRequirements);
 
+
 const compatibilityRate = (fulfilledRequirements / totalRequirements) * 100;
 
 const compatibilityMessage = `
-    Company: ${jobPostings[1].company}
-    Position: ${jobPostings[1].position}
+    Company: ${jobPostings[0].company}
+    Position: ${jobPostings[0].position}
     Compatibility: ${compatibilityRate}%
-    Matching Skills: ${matchingSkills}
-    Missing Skills: ${missingSkills}
+    Matching Skills:${matchingSkills}
+    Missing Skills: ${("\n") + missingFormated.join("\n")}
 `;
 
 console.log(compatibilityMessage);
