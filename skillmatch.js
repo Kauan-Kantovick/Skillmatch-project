@@ -34,7 +34,7 @@ const jobPostings = [
 
 //==============================INITIALIZATION=========================================
 
-const jobRequirements = jobPostings[0].requirements;
+const jobRequirements = jobPostings[1].requirements;
 
 const candidateSkills = candidate.skills;
 
