@@ -1,7 +1,7 @@
 const candidate = {
     name: "Ana",
     area: "Front-End",
-    skills: ["JavaScript", "GitHub", "Programming Logic", "Kanban"],
+    skills: ["JavaScript", "GitHub", "Programming Logic"],
     monthsOfExperience: 3
 };
 
@@ -10,7 +10,7 @@ const jobPostings = [
         id: 1,
         company: "TechStart",
         position: "Junior Front-End Developer",
-        requirements: ["JavaScript", "GitHub", "Programming Logic", "Objects"],
+        requirements: ["JavaScript", "GitHub", "Programming Logic", "Objects", "Kanban", "Objects", "Arrays", "Functions"],
         salary: 2800,
         workStyle: "Remote"
     },
@@ -32,9 +32,9 @@ const jobPostings = [
     }
 ];
 
-//==============================INITIALIZATION=========================================
+//==============================Instances=========================================
 
-const jobRequirements = jobPostings[1].requirements;
+const jobRequirements = jobPostings[0].requirements;
 
 const candidateSkills = candidate.skills;
 
@@ -48,6 +48,8 @@ const missingSkills = jobRequirements.filter(requirement =>
     candidateSkills.includes(requirement) === false
 );
 
+const missingFormated = missingSkills.map (skill => `    -${skill}`)
+
 const fulfilledRequirements = matchingSkills.length;
 
 //==============================APPLIED-LOGIC=====================================
@@ -58,14 +60,15 @@ const totalRequirements = jobRequirements.length;
 
 // console.log(totalRequirements);
 
+
 const compatibilityRate = (fulfilledRequirements / totalRequirements) * 100;
 
 const compatibilityMessage = `
-    Company: ${jobPostings[1].company}
-    Position: ${jobPostings[1].position}
+    Company: ${jobPostings[0].company}
+    Position: ${jobPostings[0].position}
     Compatibility: ${compatibilityRate}%
-    Matching Skills: ${matchingSkills}
-    Missing Skills: ${missingSkills}
+    Matching Skills:${matchingSkills}
+    Missing Skills: ${("\n") + missingFormated.join("\n")}
 `;
 
 console.log(compatibilityMessage);
@@ -76,13 +79,13 @@ const compatibilityClassification = (compatibilityRate) => {
     if (compatibilityRate === 100) {
         let Total = `Total compatibility`
         return Total;
-    } else if (compatibilityRate >= 80) {
+    } else if (compatibilityRate <= 99 && compatibilityRate >= 80) {
         let High = `High compatibility`
         return High;
-    } else if (compatibilityRate >= 50) {
+    } else if (compatibilityRate <= 79 && compatibilityRate >= 50) {
         let Moderate = `Moderate compatibility`
         return Moderate;
-    } else if (compatibilityRate >= 1) {
+    } else if (compatibilityRate <= 49 && compatibilityRate >= 1) {
         let Low = `Low compatibility`
         return Low;
     } else if (compatibilityRate === 0) {
