@@ -21,7 +21,7 @@ class jobPosting {
     }
 }
 
-class techJobs extends jobPosting {
+class techJob extends jobPosting {
     constructor(id, company, position, requirements, salary, workStyle, yearsExperience = 0) {
         super(id, company, position, requirements, salary, workStyle);
         this.yearsExperience = yearsExperience;
@@ -29,9 +29,9 @@ class techJobs extends jobPosting {
 }
 
 const jobOpenings = [
-    new techJobs(1, "TechStart", "Junior Front-End Developer", ["JavaScript", "GitHub", "Programming Logic", "Objects"], 2800, "Remote", 1),
-    new techJobs(2, "CodeLab", "Front-End Internship", ["JavaScript", "Kanban", "GitHub"], 1800, "Hybrid"),
-    new techJobs(3, "WebSolutions", "Junior JavaScript Developer", ["JavaScript", "Arrays", "Objects", "Functions"], 3000, "On-site", 2)
+    new techJob(1, "TechStart", "Junior Front-End Developer", ["JavaScript", "GitHub", "Programming Logic", "Objects"], 2800, "Remote", 1),
+    new techJob(2, "CodeLab", "Front-End Internship", ["JavaScript", "Kanban", "GitHub"], 1800, "Hybrid"),
+    new techJob(3, "WebSolutions", "Junior JavaScript Developer", ["JavaScript", "Arrays", "Objects", "Functions"], 3000, "On-site", 2)
 ];
 
 //==============================Instances=========================================
@@ -64,7 +64,9 @@ const fulfilledRequirements = matchingSkills.length;
 
 const totalRequirements = jobsRequirements.length;
 
-const compatibilityRate = (fulfilledRequirements / totalRequirements) * 100;
+const compatibilityCalculus = (valA, valB) => (valA / valB) * 100;
+
+const compatibilityRate = compatibilityCalculus(fulfilledRequirements, totalRequirements);
 
 const compatibilityMessage = `
     Company: ${jobOpenings[0].company}
@@ -108,3 +110,33 @@ const showingCompatibility = `
 `;
 
 console.log(showingCompatibility);
+
+
+
+//==============================RECOMMENDED-STUDIES=========================================
+
+const recommendedStudies = `
+    Recommendation for further study:
+    Priotize study: ${("\n") + missingFormated.join("\n")} 
+`;
+
+console.log(recommendedStudies);
+
+//==============================BETTER-COMPATIBILITY=========================================
+
+function betterJob (candidate, jobOpenings) {
+ return jobOpenings.reduce((better, current) => {
+    let betterJob = compatibilityCalculus(candidate, better);
+    let currentJob  = compatibilityCalculus(candidate, current);
+
+    if (betterJob > currentJob) {
+      return currentJob;
+    } else {
+      return betterJob;
+    }
+  });
+}
+
+const example = betterJob(candidate_1, jobOpenings);
+
+console.log(example);
