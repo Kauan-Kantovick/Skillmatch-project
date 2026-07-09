@@ -21,6 +21,7 @@ class jobPosting {
     }
 }
 
+
 class techJob extends jobPosting {
     constructor(id, company, position, requirements, salary, workStyle, yearsExperience = 0) {
         super(id, company, position, requirements, salary, workStyle);
@@ -33,6 +34,47 @@ const jobOpenings = [
     new techJob(2, "CodeLab", "Front-End Internship", ["JavaScript", "Kanban", "GitHub"], 1800, "Hybrid"),
     new techJob(3, "WebSolutions", "Junior JavaScript Developer", ["JavaScript", "Arrays", "Objects", "Functions"], 3000, "On-site", 2)
 ];
+
+//mostrar vagas
+//perguntar
+//usar id para fazer o código
+/*
+const jobsLength = jobOpenings.length;
+
+const viewJobs = (jobsLength, jobOpenings) => {
+    let i = 0
+    while (i < jobsLength){
+        let mensagem = `
+            Vaga Indice ${i}:
+            ID:${jobOpenings[i].id},
+            COMPANY:${jobOpenings[i].company},
+            POSITION:${jobOpenings[i].position},
+            REQUIREMENTS:${jobOpenings[i].requirements},
+            SALARY:${jobOpenings[i].salary},
+            WORK-STYLE:${jobOpenings[i].workStyle},
+            YEARS-EXPERIENCE:${jobOpenings[i].yearsExperience}.
+        `
+        console.log(mensagem);
+        operator++;
+    }
+}
+
+const dwadwad = viewJobs(jobOpenings);
+
+console.log(dwadwad);
+*/
+
+const frutas = ["Maçã", "Banana", "Uva"];
+
+function mostrarFrutas(frutas){
+    let i = 0;
+    while(i < frutas.length) {
+        return `${("\n") + frutas[i]}`
+        i++;
+    }
+}
+
+console.log(mostrarFrutas(frutas));
 
 //==============================Instances=========================================
 
@@ -124,19 +166,25 @@ console.log(recommendedStudies);
 
 //==============================BETTER-COMPATIBILITY=========================================
 
-function betterJob (candidate, jobOpenings) {
- return jobOpenings.reduce((better, current) => {
-    let betterJob = compatibilityCalculus(candidate, better);
-    let currentJob  = compatibilityCalculus(candidate, current);
+function matchingJobs(jobOpenings, candidateSkills) {
+    let sldla = jobOpenings[1].requirements;
 
-    if (betterJob > currentJob) {
-      return currentJob;
-    } else {
-      return betterJob;
-    }
-  });
+    let matchingSkills = candidateSkills.filter(skill =>
+        sldla.includes(skill)
+    );
+
+    let missingSkills = sldla.filter(requirement =>
+        candidateSkills.includes(requirement) === false
+    );
+
+    const daiwoid = matchingSkills.length;
+
+    const dawda =  candidateSkills.length;
+
+    const compatibilitywdadRate = compatibilityCalculus(daiwoid, dawda);
+
+    console.log (`ndawndaoi ${compatibilitywdadRate}`);
+
 }
 
-const example = betterJob(candidate_1, jobOpenings);
-
-console.log(example);
+matchingJobs(jobOpenings, candidateSkills);
