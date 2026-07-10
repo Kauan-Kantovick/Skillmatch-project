@@ -5,10 +5,19 @@ class candidate {
         this.skills = skills;
         this.workStyle = workStyle;
         this.monthsExperience = monthsExperience;
-    }
+    };
+    Presentation() {
+        console.log (`
+        Hi, my name is ${this.name},
+        y work in the area ${this.area} whit a ${this.workStyle} work style,
+        my skills are ${this.skills}, and y have ${this.monthsExperience} years of experience.
+        `);
+    };
 }
 
 const candidate_1 = new candidate("Ana", "Front-End", ["JavaScript", "GitHub", "Programming Logic"], "Hybrid", 3);
+
+candidate_1.Presentation();
 
 class jobPosting {
     constructor(id, company, position, requirements, salary, workStyle) {
@@ -21,7 +30,8 @@ class jobPosting {
     }
 }
 
-class techJobs extends jobPosting {
+
+class techJob extends jobPosting {
     constructor(id, company, position, requirements, salary, workStyle, yearsExperience = 0) {
         super(id, company, position, requirements, salary, workStyle);
         this.yearsExperience = yearsExperience;
@@ -29,10 +39,38 @@ class techJobs extends jobPosting {
 }
 
 const jobOpenings = [
-    new techJobs(1, "TechStart", "Junior Front-End Developer", ["JavaScript", "GitHub", "Programming Logic", "Objects"], 2800, "Remote", 1),
-    new techJobs(2, "CodeLab", "Front-End Internship", ["JavaScript", "Kanban", "GitHub"], 1800, "Hybrid"),
-    new techJobs(3, "WebSolutions", "Junior JavaScript Developer", ["JavaScript", "Arrays", "Objects", "Functions"], 3000, "On-site", 2)
+    new techJob(1, "TechStart", "Junior Front-End Developer", ["JavaScript", "GitHub", "Programming Logic", "Objects"], 2800, "Remote", 1),
+    new techJob(2, "CodeLab", "Front-End Internship", ["JavaScript", "Kanban", "GitHub"], 1800, "Hybrid"),
+    new techJob(3, "WebSolutions", "Junior JavaScript Developer", ["JavaScript", "Arrays", "Objects", "Functions"], 3000, "On-site", 2)
 ];
+
+//mostrar vagas
+//perguntar
+//usar id para fazer o código
+
+const viewJobs = (jobOpenings) => {
+    let i = 0;
+    console.log(`
+        =================== JOBS POSTINGS ====================
+        `);
+    while (i < jobOpenings.length) {
+        let mensagem = `
+
+            Job Posting Index ${i}:
+            ID:${jobOpenings[i].id},
+            COMPANY:${jobOpenings[i].company},
+            POSITION:${jobOpenings[i].position},
+            REQUIREMENTS:${jobOpenings[i].requirements},
+            SALARY:${jobOpenings[i].salary},
+            WORK-STYLE:${jobOpenings[i].workStyle},
+            YEARS-EXPERIENCE:${jobOpenings[i].yearsExperience}.
+        `
+        console.log(mensagem);
+        i++;
+    }
+}
+
+console.log(viewJobs(jobOpenings));
 
 //==============================Instances=========================================
 
@@ -52,9 +90,9 @@ const missingSkills = jobsRequirements.filter(requirement =>
 
 //==============================FORMATTING=========================================
 
-const matchingFormated = matchingSkills.map (skill => ` ${skill}`);
+const matchingFormated = matchingSkills.map(skill => ` ${skill}`);
 
-const missingFormated = missingSkills.map (skill => `    -${skill}`);
+const missingFormated = missingSkills.map(skill => `    -${skill}`);
 
 //==============================APPLIED-LOGIC=====================================
 // For each candidate skill that is included in the job posting requirements,
@@ -64,9 +102,12 @@ const fulfilledRequirements = matchingSkills.length;
 
 const totalRequirements = jobsRequirements.length;
 
-const compatibilityRate = (fulfilledRequirements / totalRequirements) * 100;
+const compatibilityCalculus = (valA, valB) => Math.round((valA / valB) * 100);
+
+const compatibilityRate = compatibilityCalculus(fulfilledRequirements, totalRequirements);
 
 const compatibilityMessage = `
+=================== COMPATIBILITY MESSAGE ====================
     Company: ${jobOpenings[0].company}
     Position: ${jobOpenings[0].position}
     Compatibility: ${compatibilityRate}%
@@ -103,8 +144,65 @@ const compatibilityClassification = (compatibilityRate) => {
 const chekingCompatibility = compatibilityClassification(compatibilityRate)
 
 const showingCompatibility = `
-    Checking Compatibility:
+=================== CHEKING COMPATIBILITY ====================
     ${chekingCompatibility}
 `;
 
 console.log(showingCompatibility);
+
+//==============================RECOMMENDED-STUDIES=========================================
+
+const recommendedStudies = `
+=================== STUDY RECOMMENDATION ====================
+    Priotize study: ${("\n") + missingFormated.join("\n")} 
+`;
+
+console.log(recommendedStudies);
+
+//==============================BETTER-JOB==================================================
+
+const bestJob = (candidate, jobOpenings) => {   
+    let bestMatch = "";
+    let highestCompatibility = -1;
+
+    for (const job of jobOpenings) {
+
+        // Habilidades em comum
+        const matchingSkills = candidate.skills.filter(skill => job.requirements.includes(skill));
+
+        // Cálculo da compatibilidade
+        const compatibility = compatibilityCalculus(matchingSkills.length, job.requirements.length);
+
+        // Verifica se é a melhor até agora
+        if (compatibility > highestCompatibility) {
+            highestCompatibility = compatibility;
+
+            bestMatch = {
+                job,
+                compatibility,
+                matchingSkills,
+                missingSkills: job.requirements.filter(requirement => !candidate.skills.includes(requirement))
+            };
+        }
+    }
+
+    return bestMatch;
+};
+
+const recommendation = bestJob(candidate_1, jobOpenings);
+
+console.log(`
+================= BEST JOB =================
+
+Company: ${recommendation.job.company}
+Position: ${recommendation.job.position}
+Compatibility: ${recommendation.compatibility}%
+Classification: ${compatibilityClassification(recommendation.compatibility)}
+
+Matching Skills:
+${recommendation.matchingSkills.join("\n")}
+
+Missing Skills:
+${recommendation.missingSkills.join("\n")}
+
+`);
