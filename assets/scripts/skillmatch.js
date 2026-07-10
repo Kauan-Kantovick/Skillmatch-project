@@ -38,14 +38,16 @@ const jobOpenings = [
 //mostrar vagas
 //perguntar
 //usar id para fazer o código
-/*
-const jobsLength = jobOpenings.length;
 
-const viewJobs = (jobsLength, jobOpenings) => {
-    let i = 0
-    while (i < jobsLength){
+const viewJobs = (jobOpenings) => {
+    let i = 0;
+    console.log(`
+        =================== JOBS POSTINGS ====================
+        `);
+    while (i < jobOpenings.length) {
         let mensagem = `
-            Vaga Indice ${i}:
+
+            Job Posting Index ${i}:
             ID:${jobOpenings[i].id},
             COMPANY:${jobOpenings[i].company},
             POSITION:${jobOpenings[i].position},
@@ -55,26 +57,11 @@ const viewJobs = (jobsLength, jobOpenings) => {
             YEARS-EXPERIENCE:${jobOpenings[i].yearsExperience}.
         `
         console.log(mensagem);
-        operator++;
-    }
-}
-
-const dwadwad = viewJobs(jobOpenings);
-
-console.log(dwadwad);
-*/
-
-const frutas = ["Maçã", "Banana", "Uva"];
-
-function mostrarFrutas(frutas){
-    let i = 0;
-    while(i < frutas.length) {
-        return `${("\n") + frutas[i]}`
         i++;
     }
 }
 
-console.log(mostrarFrutas(frutas));
+console.log(viewJobs(jobOpenings));
 
 //==============================Instances=========================================
 
@@ -94,9 +81,9 @@ const missingSkills = jobsRequirements.filter(requirement =>
 
 //==============================FORMATTING=========================================
 
-const matchingFormated = matchingSkills.map (skill => ` ${skill}`);
+const matchingFormated = matchingSkills.map(skill => ` ${skill}`);
 
-const missingFormated = missingSkills.map (skill => `    -${skill}`);
+const missingFormated = missingSkills.map(skill => `    -${skill}`);
 
 //==============================APPLIED-LOGIC=====================================
 // For each candidate skill that is included in the job posting requirements,
@@ -106,11 +93,12 @@ const fulfilledRequirements = matchingSkills.length;
 
 const totalRequirements = jobsRequirements.length;
 
-const compatibilityCalculus = (valA, valB) => (valA / valB) * 100;
+const compatibilityCalculus = (valA, valB) => Math.round((valA / valB) * 100);
 
 const compatibilityRate = compatibilityCalculus(fulfilledRequirements, totalRequirements);
 
 const compatibilityMessage = `
+=================== COMPATIBILITY MESSAGE ====================
     Company: ${jobOpenings[0].company}
     Position: ${jobOpenings[0].position}
     Compatibility: ${compatibilityRate}%
@@ -147,44 +135,65 @@ const compatibilityClassification = (compatibilityRate) => {
 const chekingCompatibility = compatibilityClassification(compatibilityRate)
 
 const showingCompatibility = `
-    Checking Compatibility:
+=================== CHEKING COMPATIBILITY ====================
     ${chekingCompatibility}
 `;
 
 console.log(showingCompatibility);
 
-
-
 //==============================RECOMMENDED-STUDIES=========================================
 
 const recommendedStudies = `
-    Recommendation for further study:
+=================== STUDY RECOMMENDATION ====================
     Priotize study: ${("\n") + missingFormated.join("\n")} 
 `;
 
 console.log(recommendedStudies);
 
-//==============================BETTER-COMPATIBILITY=========================================
+//==============================BETTER-JOB==================================================
 
-function matchingJobs(jobOpenings, candidateSkills) {
-    let sldla = jobOpenings[1].requirements;
+const bestJob = (candidate, jobOpenings) => {   
+    let bestMatch = "";
+    let highestCompatibility = -1;
 
-    let matchingSkills = candidateSkills.filter(skill =>
-        sldla.includes(skill)
-    );
+    for (const job of jobOpenings) {
 
-    let missingSkills = sldla.filter(requirement =>
-        candidateSkills.includes(requirement) === false
-    );
+        // Habilidades em comum
+        const matchingSkills = candidate.skills.filter(skill => job.requirements.includes(skill));
 
-    const daiwoid = matchingSkills.length;
+        // Cálculo da compatibilidade
+        const compatibility = compatibilityCalculus(matchingSkills.length, job.requirements.length);
 
-    const dawda =  candidateSkills.length;
+        // Verifica se é a melhor até agora
+        if (compatibility > highestCompatibility) {
+            highestCompatibility = compatibility;
 
-    const compatibilitywdadRate = compatibilityCalculus(daiwoid, dawda);
+            bestMatch = {
+                job,
+                compatibility,
+                matchingSkills,
+                missingSkills: job.requirements.filter(requirement => !candidate.skills.includes(requirement))
+            };
+        }
+    }
 
-    console.log (`ndawndaoi ${compatibilitywdadRate}`);
+    return bestMatch;
+};
 
-}
+const recommendation = bestJob(candidate_1, jobOpenings);
 
-matchingJobs(jobOpenings, candidateSkills);
+console.log(`
+================= BEST JOB =================
+
+Company: ${recommendation.job.company}
+Position: ${recommendation.job.position}
+Compatibility: ${recommendation.compatibility}%
+Classification: ${compatibilityClassification(recommendation.compatibility)}
+
+Matching Skills:
+${recommendation.matchingSkills.join("\n")}
+
+Missing Skills:
+${recommendation.missingSkills.join("\n")}
+
+`);
