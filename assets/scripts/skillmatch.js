@@ -5,10 +5,19 @@ class candidate {
         this.skills = skills;
         this.workStyle = workStyle;
         this.monthsExperience = monthsExperience;
-    }
+    };
+    Presentation() {
+        console.log (`
+        Hi, my name is ${this.name},
+        y work in the area ${this.area} whit a ${this.workStyle} work style,
+        my skills are ${this.skills}, and y have ${this.monthsExperience} years of experience.
+        `);
+    };
 }
 
 const candidate_1 = new candidate("Ana", "Front-End", ["JavaScript", "GitHub", "Programming Logic"], "Hybrid", 3);
+
+candidate_1.Presentation();
 
 class jobPosting {
     constructor(id, company, position, requirements, salary, workStyle) {
