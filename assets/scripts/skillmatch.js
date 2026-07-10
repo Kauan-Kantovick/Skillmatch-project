@@ -7,7 +7,7 @@ class candidate {
         this.monthsExperience = monthsExperience;
     };
     Presentation() {
-        console.log (`
+        console.log(`
         Hi, my name is ${this.name},
         y work in the area ${this.area} whit a ${this.workStyle} work style,
         my skills are ${this.skills}, and y have ${this.monthsExperience} years of experience.
@@ -70,7 +70,7 @@ const viewJobs = (jobOpenings) => {
     }
 }
 
-console.log(viewJobs(jobOpenings));
+viewJobs(jobOpenings);
 
 //==============================Instances=========================================
 
@@ -94,9 +94,24 @@ const matchingFormated = matchingSkills.map(skill => ` ${skill}`);
 
 const missingFormated = missingSkills.map(skill => `    -${skill}`);
 
-//==============================APPLIED-LOGIC=====================================
-// For each candidate skill that is included in the job posting requirements,
-// return its name. If it does not match, do nothing.
+//==============================ANALYSES-COUNTER==============================
+
+const createAnalysisCounter = (() => {
+    let counter = 0;
+
+    return {
+        countAnalysis() {
+            counter++;
+            return counter;
+        },
+
+        analysisInfo() {
+            return console.log(`Total analyses ${counter}`);
+        }
+    }
+})();
+
+//==============================COMPATIBILITY-MESSAGE=====================================
 
 const fulfilledRequirements = matchingSkills.length;
 
@@ -115,8 +130,16 @@ const compatibilityMessage = `
     Missing Skills: ${("\n") + missingFormated.join("\n")}
 `;
 
-console.log(compatibilityMessage);
+const messageVerification = (compatibilityRate, createAnalysisCounter, compatibilityMessage) => {
+    if (compatibilityRate >= 0){
+        createAnalysisCounter.countAnalysis();
+        return console.log(compatibilityMessage);
+    } else {
+        console.log(`ERROR!!!`);
+    }
+} 
 
+messageVerification(compatibilityRate, createAnalysisCounter, compatibilityMessage);
 //==============================CLASSIFYING-COMPATIBILITY============================
 
 const compatibilityClassification = (compatibilityRate) => {
@@ -159,21 +182,20 @@ const recommendedStudies = `
 
 console.log(recommendedStudies);
 
+
+
 //==============================BETTER-JOB==================================================
 
-const bestJob = (candidate, jobOpenings) => {   
+const bestJob = (candidate, jobOpenings) => {
     let bestMatch = "";
     let highestCompatibility = -1;
-
     for (const job of jobOpenings) {
+        createAnalysisCounter.countAnalysis();
 
-        // Habilidades em comum
         const matchingSkills = candidate.skills.filter(skill => job.requirements.includes(skill));
 
-        // Cálculo da compatibilidade
         const compatibility = compatibilityCalculus(matchingSkills.length, job.requirements.length);
 
-        // Verifica se é a melhor até agora
         if (compatibility > highestCompatibility) {
             highestCompatibility = compatibility;
 
@@ -206,3 +228,4 @@ Missing Skills:
 ${recommendation.missingSkills.join("\n")}
 
 `);
+createAnalysisCounter.analysisInfo();
