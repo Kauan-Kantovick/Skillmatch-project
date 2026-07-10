@@ -30,7 +30,6 @@ class jobPosting {
     }
 }
 
-
 class techJob extends jobPosting {
     constructor(id, company, position, requirements, salary, workStyle, yearsExperience = 0) {
         super(id, company, position, requirements, salary, workStyle);
@@ -43,10 +42,6 @@ const jobOpenings = [
     new techJob(2, "CodeLab", "Front-End Internship", ["JavaScript", "Kanban", "GitHub"], 1800, "Hybrid"),
     new techJob(3, "WebSolutions", "Junior JavaScript Developer", ["JavaScript", "Arrays", "Objects", "Functions"], 3000, "On-site", 2)
 ];
-
-//mostrar vagas
-//perguntar
-//usar id para fazer o código
 
 const viewJobs = (jobOpenings) => {
     let i = 0;
@@ -181,8 +176,6 @@ const recommendedStudies = `
 `;
 
 console.log(recommendedStudies);
-
-
 
 //==============================BETTER-JOB==================================================
 
