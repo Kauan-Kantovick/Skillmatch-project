@@ -1,3 +1,4 @@
+//==============================CLASS-CANDIDATE=========================================
 class candidate {
     constructor(name, area, skills, workStyle, monthsExperience) {
         this.name = name;
@@ -7,17 +8,15 @@ class candidate {
         this.monthsExperience = monthsExperience;
     };
     Presentation() {
-        console.log(`
-        Hi, my name is ${this.name},
-        y work in the area ${this.area} whit a ${this.workStyle} work style,
-        my skills are ${this.skills}, and y have ${this.monthsExperience} years of experience.
-        `);
+        console.log(`Hi, my name is ${this.name}, y work in the area ${this.area} whit a ${this.workStyle} work style, my skills are ${this.skills}, and y have ${this.monthsExperience} years of experience.`);
     };
 }
 
 const candidate_1 = new candidate("Ana", "Front-End", ["JavaScript", "GitHub", "Programming Logic"], "Hybrid", 3);
 
 candidate_1.Presentation();
+
+//==============================CLASS-JOBS=========================================
 
 class jobPosting {
     constructor(id, company, position, requirements, salary, workStyle) {
@@ -29,7 +28,6 @@ class jobPosting {
         this.workStyle = workStyle;
     }
 }
-
 
 class techJob extends jobPosting {
     constructor(id, company, position, requirements, salary, workStyle, yearsExperience = 0) {
@@ -44,9 +42,7 @@ const jobOpenings = [
     new techJob(3, "WebSolutions", "Junior JavaScript Developer", ["JavaScript", "Arrays", "Objects", "Functions"], 3000, "On-site", 2)
 ];
 
-//mostrar vagas
-//perguntar
-//usar id para fazer o código
+//==============================VIEW-JOBS=========================================
 
 const viewJobs = (jobOpenings) => {
     let i = 0;
@@ -72,7 +68,7 @@ const viewJobs = (jobOpenings) => {
 
 viewJobs(jobOpenings);
 
-//==============================Instances=========================================
+//==============================INSTANCES=========================================
 
 const jobsRequirements = jobOpenings[0].requirements;
 
@@ -80,13 +76,9 @@ const candidateSkills = candidate_1.skills;
 
 //==============================COMPARISON=========================================
 
-const matchingSkills = candidateSkills.filter(skill =>
-    jobsRequirements.includes(skill)
-);
+const matchingSkills = candidateSkills.filter(skill => jobsRequirements.includes(skill));
 
-const missingSkills = jobsRequirements.filter(requirement =>
-    candidateSkills.includes(requirement) === false
-);
+const missingSkills = jobsRequirements.filter(requirement => candidateSkills.includes(requirement) === false);
 
 //==============================FORMATTING=========================================
 
@@ -111,7 +103,7 @@ const createAnalysisCounter = (() => {
     }
 })();
 
-//==============================COMPATIBILITY-MESSAGE=====================================
+//==============================COMPATIBILITY-CALCULUS-AND-MESSAGE=====================================
 
 const fulfilledRequirements = matchingSkills.length;
 
@@ -135,7 +127,7 @@ const messageVerification = (compatibilityRate, createAnalysisCounter, compatibi
         createAnalysisCounter.countAnalysis();
         return console.log(compatibilityMessage);
     } else {
-        console.log(`ERROR!!!`);
+        console.log(`ERROR`);
     }
 } 
 
@@ -182,14 +174,13 @@ const recommendedStudies = `
 
 console.log(recommendedStudies);
 
-
-
 //==============================BETTER-JOB==================================================
 
 const bestJob = (candidate, jobOpenings) => {
     let bestMatch = "";
     let highestCompatibility = -1;
     for (const job of jobOpenings) {
+        
         createAnalysisCounter.countAnalysis();
 
         const matchingSkills = candidate.skills.filter(skill => job.requirements.includes(skill));
@@ -229,3 +220,47 @@ ${recommendation.missingSkills.join("\n")}
 
 `);
 createAnalysisCounter.analysisInfo();
+
+//==============================CALLBACK==================================================
+
+const finalAnalysis = "Analysis finalyzed.";
+const candidateName = candidate_1.name;
+
+function finalMensage (name, analyse) {
+  console.log(`${name}, review your missing skills and atualize your studies plan.`);
+  console.log(analyse);
+}
+
+function finalizingAnalysis(callback) {
+  callback(candidateName, finalAnalysis);
+}
+
+finalizingAnalysis(finalMensage);
+
+//==============================PROMISE-ASYNC/AWAIT==================================================
+
+function seartingSimulations() {
+    return new Promise((resolve, reject) => {
+
+        console.log("Searting for job openings");
+
+        setTimeout(() => {
+
+            if(true) {
+                resolve(jobOpenings.length)
+            } else {
+                reject("Job Openings not found");
+            }
+        }, 2000);
+    });
+}
+
+async function iniciatingSearch() {
+    const jobsUploaded = await seartingSimulations();
+    console.log(`
+        Jobs openings are uploaded whith success!
+        Total of ${jobsUploaded} jobs are founded.
+        `);
+}
+
+iniciatingSearch();

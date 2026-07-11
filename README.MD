@@ -25,8 +25,8 @@ The system analyzes and returns:
 ✔️ Skills required by the job position
 ✔️ Missing skills the candidate needs to meet the requirements
 ✔️ Compatibility percentage for each job position
-❌ Position with the highest compatibility score
-❌ Study recommendations for professional growth
+✔️ Position with the highest compatibility score
+✔️ Study recommendations for professional growth
 
 ---
 
@@ -54,22 +54,40 @@ You can run it using one of the following methods:
 
 ## 📸 Screenshots
 
-![Candidates and Job Openings](image-1.png)
+![Session: Class candidate](./assets/imgs/Screenshot_class-candidate.png)
 
-![Instances and Compatibility](image-2.png)
+![Session: Class jobs](./assets/imgs/Screenshot_class-jobs.png)
 
-![Compatibility Message](image.png)
+![Session: View jobs](./assets/imgs/Screenshot_view-jobs.png)
 
-![Compatibility Ranking](image-3.png)
+![Session: Instances, comparison and formatting](./assets/imgs/Screenshot_inst-comp-form.png)
+
+![Session: Analyses counter](./assets/imgs/Screenshot_analyses-counter.png)
+
+![Session: Compatibility calculus](./assets/imgs/Screenshot_comp-calculus.png)
+
+![Session: Classifying compatibility](./assets/imgs/Screenshot_comp-classifying.png)
+
+![Session: Recommended studies](./assets/imgs/Screenshot_reco-stud.png)
+
+![Session: Better job](./assets/imgs/Screenshot_better-job.png)
+
+![Session: Callback](./assets/imgs/Screenshot_callback.png)
+
+![Session: Promise async-await](./assets/imgs/Screenshot_promisse.png)
 
 ---
 
 ## 🏗️ Project Structure
 
 ```text
-skillmatch-js/
+skillmatch-project/
 │
-├── skillmatch.js
+├── assets
+│   ├── imgs (screenshots)
+│   └── scripts
+│       └── skillmatch.js   
+├── .gitignore
 └── README.md
 ```
 
