@@ -1,3 +1,4 @@
+//==============================CLASS-CANDIDATE=========================================
 class candidate {
     constructor(name, area, skills, workStyle, monthsExperience) {
         this.name = name;
@@ -18,6 +19,8 @@ class candidate {
 const candidate_1 = new candidate("Ana", "Front-End", ["JavaScript", "GitHub", "Programming Logic"], "Hybrid", 3);
 
 candidate_1.Presentation();
+
+//==============================CLASS-JOBS=========================================
 
 class jobPosting {
     constructor(id, company, position, requirements, salary, workStyle) {
@@ -43,6 +46,8 @@ const jobOpenings = [
     new techJob(3, "WebSolutions", "Junior JavaScript Developer", ["JavaScript", "Arrays", "Objects", "Functions"], 3000, "On-site", 2)
 ];
 
+//==============================VIEW-JOBS=========================================
+
 const viewJobs = (jobOpenings) => {
     let i = 0;
     console.log(`
@@ -67,7 +72,7 @@ const viewJobs = (jobOpenings) => {
 
 viewJobs(jobOpenings);
 
-//==============================Instances=========================================
+//==============================INSTANCES=========================================
 
 const jobsRequirements = jobOpenings[0].requirements;
 
@@ -106,7 +111,7 @@ const createAnalysisCounter = (() => {
     }
 })();
 
-//==============================COMPATIBILITY-MESSAGE=====================================
+//==============================COMPATIBILITY-CALCULUS-AND-MESSAGE=====================================
 
 const fulfilledRequirements = matchingSkills.length;
 
@@ -130,7 +135,7 @@ const messageVerification = (compatibilityRate, createAnalysisCounter, compatibi
         createAnalysisCounter.countAnalysis();
         return console.log(compatibilityMessage);
     } else {
-        console.log(`ERROR!!!`);
+        console.log(`ERROR`);
     }
 } 
 
@@ -222,3 +227,19 @@ ${recommendation.missingSkills.join("\n")}
 
 `);
 createAnalysisCounter.analysisInfo();
+
+//==============================CALLBACK==================================================
+
+const finalAnalysis = "Analysis finalyzed.";
+const candidateName = candidate_1.name;
+
+function finalMensage (name, analyse) {
+  console.log(`${name}, review your missing skills and atualize your studies plan.`);
+  console.log(analyse);
+}
+
+function finalizingAnalysis(callback) {
+  callback(candidateName, finalAnalysis);
+}
+
+finalizingAnalysis(finalMensage);
