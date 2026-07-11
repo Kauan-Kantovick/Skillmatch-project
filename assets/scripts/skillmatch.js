@@ -8,11 +8,7 @@ class candidate {
         this.monthsExperience = monthsExperience;
     };
     Presentation() {
-        console.log(`
-        Hi, my name is ${this.name},
-        y work in the area ${this.area} whit a ${this.workStyle} work style,
-        my skills are ${this.skills}, and y have ${this.monthsExperience} years of experience.
-        `);
+        console.log(`Hi, my name is ${this.name}, y work in the area ${this.area} whit a ${this.workStyle} work style, my skills are ${this.skills}, and y have ${this.monthsExperience} years of experience.`);
     };
 }
 
@@ -80,13 +76,9 @@ const candidateSkills = candidate_1.skills;
 
 //==============================COMPARISON=========================================
 
-const matchingSkills = candidateSkills.filter(skill =>
-    jobsRequirements.includes(skill)
-);
+const matchingSkills = candidateSkills.filter(skill => jobsRequirements.includes(skill));
 
-const missingSkills = jobsRequirements.filter(requirement =>
-    candidateSkills.includes(requirement) === false
-);
+const missingSkills = jobsRequirements.filter(requirement => candidateSkills.includes(requirement) === false);
 
 //==============================FORMATTING=========================================
 
@@ -188,6 +180,7 @@ const bestJob = (candidate, jobOpenings) => {
     let bestMatch = "";
     let highestCompatibility = -1;
     for (const job of jobOpenings) {
+        
         createAnalysisCounter.countAnalysis();
 
         const matchingSkills = candidate.skills.filter(skill => job.requirements.includes(skill));
@@ -243,3 +236,31 @@ function finalizingAnalysis(callback) {
 }
 
 finalizingAnalysis(finalMensage);
+
+//==============================PROMISE-ASYNC/AWAIT==================================================
+
+function seartingSimulations() {
+    return new Promise((resolve, reject) => {
+
+        console.log("Searting for job openings");
+
+        setTimeout(() => {
+
+            if(true) {
+                resolve(jobOpenings.length)
+            } else {
+                reject("Job Openings not found");
+            }
+        }, 2000);
+    });
+}
+
+async function iniciatingSearch() {
+    const jobsUploaded = await seartingSimulations();
+    console.log(`
+        Jobs openings are uploaded whith success!
+        Total of ${jobsUploaded} jobs are founded.
+        `);
+}
+
+iniciatingSearch();
