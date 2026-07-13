@@ -268,3 +268,5 @@ async function iniciatingSearch() {
 }
 
 iniciatingSearch();
+
+// jobOpenings.find(item => item.id === o que usuario selecionou)
