@@ -271,16 +271,16 @@ iniciatingSearch();
 
 // jobOpenings.find(item => item.id === o que usuario selecionou)
 
-const jobSelected = Number(prompt('Informe o id'))
+// const jobSelected = Number(prompt('Informe o id'))
 
-const jobEncontrado = jobOpenings.find(job => job.id === jobSelected)
+// const jobEncontrado = jobOpenings.find(job => job.id === jobSelected)
 
-if (!jobEncontrado) {
-  alert('Vaga não encontrada')
-  return
-}
+// if (!jobEncontrado) {
+//   alert('Vaga não encontrada')
+//   return
+// }
 
-const { requirements, company } = jobEncontrado
+// const { requirements, company } = jobEncontrado
 // const requirements = jobEncontrado.requirements
 // const company = jobEncontrado.company
 // padronizar em PascalCase
