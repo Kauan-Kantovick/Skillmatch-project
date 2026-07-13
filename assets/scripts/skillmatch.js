@@ -70,7 +70,11 @@ viewJobs(jobOpenings);
 
 //==============================INSTANCES=========================================
 
-const jobsRequirements = jobOpenings[0].requirements;
+const prompt = require("prompt-sync")();
+
+let jobSelected = prompt("Enter the job ID of the position you want to compare with the candidate's profile: ");
+
+const jobsRequirements = jobOpenings[jobSelected].requirements;
 
 const candidateSkills = candidate_1.skills;
 
@@ -115,8 +119,8 @@ const compatibilityRate = compatibilityCalculus(fulfilledRequirements, totalRequ
 
 const compatibilityMessage = `
 =================== COMPATIBILITY MESSAGE ====================
-    Company: ${jobOpenings[0].company}
-    Position: ${jobOpenings[0].position}
+    Company: ${jobOpenings[jobSelected].company}
+    Position: ${jobOpenings[jobSelected].position}
     Compatibility: ${compatibilityRate}%
     Matching Skills:${matchingFormated}
     Missing Skills: ${("\n") + missingFormated.join("\n")}
@@ -136,23 +140,23 @@ messageVerification(compatibilityRate, createAnalysisCounter, compatibilityMessa
 
 const compatibilityClassification = (compatibilityRate) => {
     if (compatibilityRate === 100) {
-        let Total = `Total compatibility`
-        return Total;
+        let total = `Total compatibility`
+        return total;
     } else if (compatibilityRate <= 99 && compatibilityRate >= 80) {
-        let High = `High compatibility`
-        return High;
+        let high = `High compatibility`
+        return high;
     } else if (compatibilityRate <= 79 && compatibilityRate >= 50) {
-        let Moderate = `Moderate compatibility`
-        return Moderate;
+        let moderate = `Moderate compatibility`
+        return moderate;
     } else if (compatibilityRate <= 49 && compatibilityRate >= 1) {
-        let Low = `Low compatibility`
-        return Low;
+        let low = `Low compatibility`
+        return low;
     } else if (compatibilityRate === 0) {
-        let No = `No compatibility`
-        return No;
+        let no = `No compatibility`
+        return no;
     } else {
-        let Error = `Error`
-        return Error;
+        let error = `Error`
+        return error;
     }
 }
 
