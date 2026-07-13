@@ -5,10 +5,10 @@ class candidate {
         this.area = area;
         this.skills = skills;
         this.workStyle = workStyle;
-        this.monthsExperience = monthsExperience;
+        this.monthsExperience = yearsExperience;
     };
     Presentation() {
-        console.log(`Hi, my name is ${this.name}, y work in the area ${this.area} whit a ${this.workStyle} work style, my skills are ${this.skills}, and y have ${this.monthsExperience} years of experience.`);
+        console.log(`Hi, my name is ${this.name}, y work in the area ${this.area} whit a ${this.workStyle} work style, my skills are ${this.skills}, and y have ${this.yearsExperience} years of experience.`);
     };
 }
 
@@ -270,3 +270,16 @@ async function iniciatingSearch() {
 iniciatingSearch();
 
 // jobOpenings.find(item => item.id === o que usuario selecionou)
+
+const jobSelected = Number(prompt('Informe o id'))
+
+const jobEncontrado = jobOpenings.find(job => job.id === jobSelected)
+
+if (!jobEncontrado) {
+  alert('Vaga não encontrada')
+  return
+}
+
+const { requirements, company } = jobEncontrado
+// const requirements = jobEncontrado.requirements
+// const company = jobEncontrado.company
