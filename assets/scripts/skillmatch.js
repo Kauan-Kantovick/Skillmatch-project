@@ -283,3 +283,4 @@ if (!jobEncontrado) {
 const { requirements, company } = jobEncontrado
 // const requirements = jobEncontrado.requirements
 // const company = jobEncontrado.company
+// padronizar em PascalCase
